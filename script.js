@@ -5,6 +5,8 @@ const guessInput = document.querySelector('.guess');
 const guessNumber = document.querySelector('.number');
 const message = document.querySelector('.message');
 const body = document.querySelector('body');
+const reset = document.querySelector('.again');
+
 let score = 20;
 
 const scoreFail = function () {
@@ -14,11 +16,10 @@ const scoreFail = function () {
   } else {
     message.textContent = '💥 You lost the game';
     document.querySelector('.score').textContent = 0;
-    guessInput.value = '';
   }
 };
 
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 const clickHandler = function () {
   const guess = Number(guessInput.value);
@@ -39,4 +40,16 @@ const clickHandler = function () {
   }
 };
 
+const resetHandler = function () {
+  score = 20;
+  guessInput.value = '';
+  message.textContent = 'Start guessing...';
+  guessNumber.textContent = '?';
+  body.style.backgroundColor = '#222';
+  guessNumber.style.width = '15rem';
+  document.querySelector('.score').textContent = score;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+};
+
 check.addEventListener('click', clickHandler);
+reset.addEventListener('click', resetHandler);
